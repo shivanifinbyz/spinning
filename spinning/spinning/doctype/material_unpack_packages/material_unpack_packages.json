@@ -1,0 +1,73 @@
+{
+ "creation": "2019-10-12 15:31:23.721916",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "package",
+  "spools",
+  "column_break_3",
+  "gross_weight",
+  "net_weight",
+  "tare_weight"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "package",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Package",
+   "options": "Package"
+  },
+  {
+   "columns": 1,
+   "fetch_from": "package.spools",
+   "fieldname": "spools",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Spools",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fetch_from": "package.gross_weight",
+   "fieldname": "gross_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Gross Weight",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fetch_from": "package.net_weight",
+   "fieldname": "net_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Net Weight",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "package.tare_weight",
+   "fieldname": "tare_weight",
+   "fieldtype": "Float",
+   "label": "Tare Weight",
+   "read_only": 1
+  }
+ ],
+ "istable": 1,
+ "modified": "2019-12-07 15:24:15.671256",
+ "modified_by": "Administrator",
+ "module": "Spinning",
+ "name": "Material Unpack Packages",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

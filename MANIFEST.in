@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include spinning *.css
+recursive-include spinning *.csv
+recursive-include spinning *.html
+recursive-include spinning *.ico
+recursive-include spinning *.js
+recursive-include spinning *.json
+recursive-include spinning *.md
+recursive-include spinning *.png
+recursive-include spinning *.py
+recursive-include spinning *.svg
+recursive-include spinning *.txt
+recursive-exclude spinning *.pyc

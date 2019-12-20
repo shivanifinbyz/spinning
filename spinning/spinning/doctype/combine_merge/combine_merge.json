@@ -1,0 +1,125 @@
+{
+ "autoname": "COM-.###",
+ "creation": "2019-11-26 14:52:46.372790",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "from_merge_detail_section",
+  "from_merge",
+  "column_break_3",
+  "from_merge_item_code",
+  "section_break_5",
+  "details",
+  "to_merge_detail_section",
+  "to_merge",
+  "column_break_7",
+  "to_merge_item_code",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "from_merge_detail_section",
+   "fieldtype": "Section Break",
+   "label": "From Merge Detail"
+  },
+  {
+   "fieldname": "from_merge",
+   "fieldtype": "Link",
+   "label": "From Merge",
+   "options": "Merge"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "from_merge.item_code",
+   "fieldname": "from_merge_item_code",
+   "fieldtype": "Link",
+   "label": "From Merge Item Code",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fieldname": "to_merge_detail_section",
+   "fieldtype": "Section Break",
+   "label": "To Merge Detail"
+  },
+  {
+   "fieldname": "to_merge",
+   "fieldtype": "Link",
+   "label": "To Merge",
+   "options": "Merge"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "to_merge.item_code",
+   "fieldname": "to_merge_item_code",
+   "fieldtype": "Link",
+   "label": "To Merge Item Code",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Combine Merge",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "details",
+   "fieldtype": "Table",
+   "label": "Details",
+   "options": "From Merge Detail",
+   "read_only": 1
+  }
+ ],
+ "is_submittable": 1,
+ "modified": "2019-12-07 15:12:09.369480",
+ "modified_by": "Administrator",
+ "module": "Spinning",
+ "name": "Combine Merge",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Local Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

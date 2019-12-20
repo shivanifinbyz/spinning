@@ -1,0 +1,141 @@
+{
+ "creation": "2019-08-12 17:12:42.120593",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "package",
+  "spools",
+  "column_break_3",
+  "item_code",
+  "item_name",
+  "warehouse",
+  "section_break_6",
+  "batch_no",
+  "merge",
+  "grade",
+  "column_break_10",
+  "gross_weight",
+  "net_weight",
+  "tare_weight"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "package",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Package",
+   "options": "Package",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fetch_from": "package.spools",
+   "fieldname": "spools",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Spools",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "package.item_code",
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Item Code",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "package.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "package.warehouse",
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "label": "Warehouse",
+   "options": "Warehouse",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "package.batch_no",
+   "fieldname": "batch_no",
+   "fieldtype": "Link",
+   "label": "Batch No",
+   "options": "Batch",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fetch_from": "package.merge",
+   "fieldname": "merge",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Merge",
+   "options": "Merge",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fetch_from": "package.grade",
+   "fieldname": "grade",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Grade",
+   "options": "Grade",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fetch_from": "package.gross_weight",
+   "fieldname": "gross_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Gross Weight",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fetch_from": "package.net_weight",
+   "fieldname": "net_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Net Weight",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "package.tare_weight",
+   "fieldname": "tare_weight",
+   "fieldtype": "Float",
+   "label": "Tare Weight",
+   "read_only": 1
+  }
+ ],
+ "istable": 1,
+ "modified": "2019-12-07 15:14:07.741842",
+ "modified_by": "Administrator",
+ "module": "Spinning",
+ "name": "Material Transfer Package",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

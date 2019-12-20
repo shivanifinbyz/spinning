@@ -1,0 +1,370 @@
+{
+ "autoname": "naming_series:",
+ "creation": "2019-08-07 17:48:09.302363",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "work_order",
+  "from_bom",
+  "item_code",
+  "item_name",
+  "merge",
+  "package_type",
+  "is_returnable",
+  "fg_completed_qty",
+  "package_item",
+  "spool_weight",
+  "column_break_5",
+  "company",
+  "posting_date",
+  "posting_time",
+  "paper_tube",
+  "package_warehouse",
+  "source_warehouse",
+  "target_warehouse",
+  "batch_no",
+  "section_break_9",
+  "returnable_by",
+  "workstation",
+  "package_series",
+  "column_break_12",
+  "grade",
+  "series_value",
+  "update_series_number",
+  "section_break_15",
+  "package_details",
+  "section_break_20",
+  "total_gross_weight",
+  "total_net_weight",
+  "column_break_23",
+  "total_tare_weight",
+  "total_spool",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "WOF-"
+  },
+  {
+   "fieldname": "work_order",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Work Order",
+   "options": "Work Order",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "work_order.production_item",
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "work_order.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "work_order.merge",
+   "fieldname": "merge",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Merge",
+   "options": "Merge",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "work_order.package_type",
+   "fieldname": "package_type",
+   "fieldtype": "Select",
+   "label": "Package Type",
+   "options": "\nBox\nPallet",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "depends_on": "eval: doc.package_type == \"Pallet\"",
+   "fetch_from": "work_order.is_returnable",
+   "fieldname": "is_returnable",
+   "fieldtype": "Check",
+   "label": "Is Returnable"
+  },
+  {
+   "fetch_from": "work_order.qty",
+   "fieldname": "fg_completed_qty",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "For Qty",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "posting_time",
+   "fieldtype": "Time",
+   "label": "Posting Time"
+  },
+  {
+   "fetch_from": "work_order.fg_warehouse",
+   "fieldname": "target_warehouse",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Target Warehouse",
+   "options": "Warehouse",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "work_order.spool_weight",
+   "fieldname": "spool_weight",
+   "fieldtype": "Float",
+   "label": "Paper Tube Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "grade",
+   "fieldtype": "Link",
+   "label": "Grade",
+   "options": "Grade"
+  },
+  {
+   "fieldname": "section_break_15",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_20",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_gross_weight",
+   "fieldtype": "Float",
+   "label": "Total Gross Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_net_weight",
+   "fieldtype": "Float",
+   "label": "Total Net Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_23",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_tare_weight",
+   "fieldtype": "Float",
+   "label": "Total Tare Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_spool",
+   "fieldtype": "Int",
+   "label": "Total Paper Tubes",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Work Order Finish",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fetch_from": "work_order.bom_no",
+   "fieldname": "from_bom",
+   "fieldtype": "Link",
+   "label": "From BOM",
+   "options": "BOM",
+   "read_only": 1
+  },
+  {
+   "fieldname": "batch_no",
+   "fieldtype": "Link",
+   "label": "Finished Item Batch",
+   "options": "Batch",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.is_returnable",
+   "fieldname": "returnable_by",
+   "fieldtype": "Date",
+   "label": "Returnable By"
+  },
+  {
+   "fetch_from": "work_order.package_item",
+   "fieldname": "package_item",
+   "fieldtype": "Link",
+   "label": "Package Item",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "work_order.source_warehouse",
+   "fieldname": "source_warehouse",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Source Warehouse",
+   "options": "Warehouse",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "work_order.paper_tube",
+   "fieldname": "paper_tube",
+   "fieldtype": "Link",
+   "label": "Paper Tube",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fieldname": "package_details",
+   "fieldtype": "Table",
+   "label": "Package Details",
+   "options": "Work Order Finish Detail"
+  },
+  {
+   "fetch_from": "work_order.workstation",
+   "fieldname": "workstation",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Workstation",
+   "options": "Workstation",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.docstatus == 0",
+   "fieldname": "update_series_number",
+   "fieldtype": "Button",
+   "label": "Update Series Number"
+  },
+  {
+   "fieldname": "package_series",
+   "fieldtype": "Data",
+   "label": "Package Series",
+   "read_only": 1
+  },
+  {
+   "fieldname": "series_value",
+   "fieldtype": "Int",
+   "label": "Series Value",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "work_order.package_warehouse",
+   "fetch_if_empty": 1,
+   "fieldname": "package_warehouse",
+   "fieldtype": "Link",
+   "label": "Package Warehouse",
+   "options": "Warehouse"
+  }
+ ],
+ "is_submittable": 1,
+ "modified": "2019-12-07 15:11:29.261102",
+ "modified_by": "Administrator",
+ "module": "Spinning",
+ "name": "Work Order Finish",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Manufacturing Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Stock User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Stock Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "item_code",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "item_code",
+ "track_changes": 1
+}

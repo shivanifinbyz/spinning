@@ -1,0 +1,391 @@
+{
+ "allow_import": 1,
+ "autoname": "naming_series:",
+ "creation": "2019-08-12 17:58:52.195071",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "is_opening",
+  "adjustment_entry",
+  "company",
+  "warehouse",
+  "column_break_4",
+  "posting_date",
+  "posting_time",
+  "set_posting_time",
+  "gate_entry_no",
+  "section_break_7",
+  "items",
+  "section_break_10",
+  "total_amount",
+  "total_additional_costs",
+  "column_break_11",
+  "total_qty",
+  "pkg_section_break",
+  "package_type",
+  "package_item",
+  "column_break_12",
+  "is_returnable",
+  "returnable_by",
+  "section_break_15",
+  "packages",
+  "section_break_21",
+  "total_package_gross_weight",
+  "column_break_23",
+  "total_package_net_weight",
+  "pallet_detail_section",
+  "pallet_item",
+  "transporter_details_section",
+  "transporter_name",
+  "vehicle_no",
+  "column_break_34",
+  "lr_no",
+  "lr_date",
+  "printing_settings_section",
+  "print_heading",
+  "column_break_28",
+  "letter_head",
+  "section_break_12",
+  "stock_entry",
+  "amended_from",
+  "column_break_24",
+  "stock_entry_pallet"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "MR-.YYYY.-\nMR-TEST-"
+  },
+  {
+   "default": "No",
+   "fieldname": "is_opening",
+   "fieldtype": "Select",
+   "label": "Is Opening",
+   "options": "Yes\nNo"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "posting_time",
+   "fieldtype": "Time",
+   "label": "Posting Time"
+  },
+  {
+   "default": "0",
+   "fieldname": "set_posting_time",
+   "fieldtype": "Check",
+   "label": "Edit Posting Date and Time"
+  },
+  {
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Material Receipt Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pkg_section_break",
+   "fieldtype": "Section Break",
+   "label": "Packages"
+  },
+  {
+   "fieldname": "packages",
+   "fieldtype": "Table",
+   "label": "Packages",
+   "options": "Material Receipt Package Detail"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_12",
+   "fieldtype": "Section Break",
+   "label": "More Information"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Material Receipt",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_package_gross_weight",
+   "fieldtype": "Float",
+   "label": "Total Package Gross Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_package_net_weight",
+   "fieldtype": "Float",
+   "label": "Total Package Net Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "package_type",
+   "fieldtype": "Select",
+   "label": "Default Package Type",
+   "options": "\nBox\nPallet"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval: doc.package_type == \"Pallet\"",
+   "fieldname": "is_returnable",
+   "fieldtype": "Check",
+   "label": "Is Returnable"
+  },
+  {
+   "depends_on": "eval: doc.is_returnable",
+   "fieldname": "returnable_by",
+   "fieldtype": "Date",
+   "label": "Returnable By"
+  },
+  {
+   "fieldname": "section_break_15",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "stock_entry",
+   "fieldtype": "Link",
+   "label": "Stock Entry",
+   "no_copy": 1,
+   "options": "Stock Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_qty",
+   "fieldtype": "Float",
+   "label": "Total Qty",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_24",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_21",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_23",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Target Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "printing_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Printing Settings"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "print_heading",
+   "fieldtype": "Link",
+   "label": "Print Heading",
+   "options": "Print Heading"
+  },
+  {
+   "fieldname": "column_break_28",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "label": "Letter Head",
+   "options": "Letter Head"
+  },
+  {
+   "fieldname": "total_additional_costs",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Total Additional Costs",
+   "read_only": 1
+  },
+  {
+   "fieldname": "package_item",
+   "fieldtype": "Link",
+   "label": "Default Package Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "pallet_detail_section",
+   "fieldtype": "Section Break",
+   "label": "Pallet detail"
+  },
+  {
+   "fieldname": "pallet_item",
+   "fieldtype": "Table",
+   "label": "Pallet item",
+   "options": "Material Receipt Pallet Item"
+  },
+  {
+   "fieldname": "stock_entry_pallet",
+   "fieldtype": "Link",
+   "label": "Stock Entry Pallet",
+   "options": "Stock Entry"
+  },
+  {
+   "fieldname": "gate_entry_no",
+   "fieldtype": "Int",
+   "in_standard_filter": 1,
+   "label": "Gate Entry No"
+  },
+  {
+   "fieldname": "transporter_details_section",
+   "fieldtype": "Section Break",
+   "label": "Transporter Details"
+  },
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Data",
+   "label": "Vehicle No"
+  },
+  {
+   "fieldname": "transporter_name",
+   "fieldtype": "Data",
+   "label": "Transporter Name"
+  },
+  {
+   "fieldname": "column_break_34",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "lr_no",
+   "fieldtype": "Data",
+   "label": "LR Number"
+  },
+  {
+   "fieldname": "lr_date",
+   "fieldtype": "Date",
+   "label": "LR Date"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.is_opening==\"No\"",
+   "fieldname": "adjustment_entry",
+   "fieldtype": "Check",
+   "label": "Adjustment Entry"
+  }
+ ],
+ "is_submittable": 1,
+ "modified": "2019-12-17 11:27:31.219758",
+ "modified_by": "Administrator",
+ "module": "Spinning",
+ "name": "Material Receipt",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Manufacturing Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Stock User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Stock Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

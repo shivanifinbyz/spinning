@@ -1,0 +1,30 @@
+{
+ "creation": "2019-10-22 12:15:32.305712",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "grade_detail"
+ ],
+ "fields": [
+  {
+   "fieldname": "grade_detail",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Grade Detail",
+   "options": "Grade",
+   "reqd": 1
+  }
+ ],
+ "istable": 1,
+ "modified": "2019-12-07 15:24:36.054542",
+ "modified_by": "Administrator",
+ "module": "Spinning",
+ "name": "Grade Detail",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

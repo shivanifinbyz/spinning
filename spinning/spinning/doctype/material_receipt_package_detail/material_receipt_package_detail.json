@@ -1,0 +1,98 @@
+{
+ "creation": "2019-08-12 17:56:38.210686",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "package",
+  "gross_weight",
+  "net_weight",
+  "tare_weight",
+  "spools",
+  "row_ref",
+  "column_break_6",
+  "package_type",
+  "package_item",
+  "is_returnable",
+  "returnable_by"
+ ],
+ "fields": [
+  {
+   "fieldname": "package",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Package",
+   "reqd": 1
+  },
+  {
+   "fieldname": "gross_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Gross Weight"
+  },
+  {
+   "fieldname": "net_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Net Weight",
+   "reqd": 1
+  },
+  {
+   "fieldname": "row_ref",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Row Ref"
+  },
+  {
+   "default": "0",
+   "fieldname": "spools",
+   "fieldtype": "Int",
+   "label": "Spools"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "package_type",
+   "fieldtype": "Select",
+   "label": "Package Type",
+   "options": "\nBox\nPallet"
+  },
+  {
+   "fieldname": "package_item",
+   "fieldtype": "Link",
+   "label": "Package Item",
+   "options": "Item"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval: doc.package_type == \"Pallet\"",
+   "fieldname": "is_returnable",
+   "fieldtype": "Check",
+   "label": "Is Returnable"
+  },
+  {
+   "depends_on": "eval: doc.is_returnable",
+   "fieldname": "returnable_by",
+   "fieldtype": "Date",
+   "label": "Returnable By"
+  },
+  {
+   "fieldname": "tare_weight",
+   "fieldtype": "Float",
+   "label": "Tare Weight",
+   "read_only": 1
+  }
+ ],
+ "istable": 1,
+ "modified": "2019-12-07 15:19:37.501848",
+ "modified_by": "Administrator",
+ "module": "Spinning",
+ "name": "Material Receipt Package Detail",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

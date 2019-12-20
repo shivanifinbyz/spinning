@@ -1,0 +1,73 @@
+
+import frappe
+from frappe import _
+from frappe.utils import nowdate, flt, cint
+from spinning.controllers.batch_controller import get_batch_no
+
+def validate(self, method):
+	for row in self.items:
+		has_batch_no = frappe.db.get_value('Item', row.item_code, 'has_batch_no')
+		if has_batch_no:
+			args = {}
+			args['item_code'] = row.item_code
+			args['merge'] = row.merge
+			args['grade'] = row.grade
+			row.batch_no = get_batch_no(args)
+	
+def on_submit(self, method):
+	update_packages(self,method)
+
+def on_cancel(self, method):
+	update_packages(self,method)
+
+def update_packages(self,method):
+	if method == "on_submit":	
+		for row in self.items:
+			if row.batch_no and row.warehouse:
+				package_list = frappe.db.sql(""" select name, remaining_qty from `tabPackage` 
+					where status <> "Out of Stock" and grade = %s and merge = %s and item_code = %s and batch_no = %s and warehouse = %s""", (row.grade, row.merge, row.item_code,row.batch_no,row.warehouse), as_dict = True)
+				total_remaining_qty = 0
+				
+				if not package_list:
+					frappe.throw(_("Unexpected error has been occured. Please contact FinByz Tech Pvt Ltd"))
+
+				total_remaining_qty = sum(flt(d.remaining_qty) for d in package_list)
+				if total_remaining_qty != row.current_qty:
+					frappe.throw(_("Unexpected error has been occured. Please contact FinByz Tech Pvt Ltd"))
+					
+				if total_remaining_qty < flt(row.quantity_difference*-1):
+					frappe.throw(_("Sufficient quantity for item {} is not available in {} warehouse for merge {}.".format(frappe.bold(row.item_code), frappe.bold(row.warehouse), frappe.bold(row.merge))))
+				else:
+					remaining_qty = row.quantity_difference
+					for pkg in package_list:
+						doc = frappe.get_doc("Package", pkg.name)
+						if remaining_qty > 0:
+							# Here, we are adding qty in package.
+							qty = remaining_qty * -1
+							remaining_qty = 0
+						else:
+							if flt(remaining_qty*-1) < doc.remaining_qty:
+								qty = flt(remaining_qty*-1)
+							else:
+								qty = doc.remaining_qty
+								
+							remaining_qty += qty
+
+						doc.add_consumption(self.doctype, self.name, qty)
+						doc.save(ignore_permissions=True)
+						
+						# Loop will break on first loop if row.quantity_difference is positive
+						if not remaining_qty:
+							break
+
+
+	elif method == "on_cancel":
+		package_list = frappe.get_list("Package Consumption", filters = {
+				'reference_doctype': self.doctype,
+				'reference_docname': self.name
+			}, fields = 'parent')
+
+		for pkg in package_list:
+			doc = frappe.get_doc("Package", pkg.parent)
+			doc.remove_consumption(self.doctype, self.name)
+			doc.save(ignore_permissions=True)

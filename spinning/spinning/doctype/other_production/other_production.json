@@ -1,0 +1,318 @@
+{
+ "autoname": "naming_series:",
+ "creation": "2019-11-11 14:28:51.502526",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "item_code",
+  "item_name",
+  "package_type",
+  "package_item",
+  "merge",
+  "grade",
+  "paper_tube",
+  "spool_weight",
+  "column_break_5",
+  "company",
+  "posting_date",
+  "posting_time",
+  "package_warehouse",
+  "s_warehouse",
+  "t_warehouse",
+  "batch_no",
+  "price_list",
+  "section_break_9",
+  "workstation",
+  "package_series",
+  "column_break_12",
+  "series_value",
+  "update_series_number",
+  "section_break_15",
+  "package_details",
+  "section_break_20",
+  "total_gross_weight",
+  "total_net_weight",
+  "column_break_23",
+  "total_tare_weight",
+  "total_spool",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "OTR-.YYYY.-"
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Item Code",
+   "options": "Item"
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "package_type",
+   "fieldtype": "Select",
+   "label": "Package Type",
+   "options": "\nBox\nPallet\nBag"
+  },
+  {
+   "fieldname": "package_item",
+   "fieldtype": "Link",
+   "label": "Package Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "merge",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Merge",
+   "options": "Merge"
+  },
+  {
+   "fieldname": "grade",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Grade",
+   "options": "Grade"
+  },
+  {
+   "fieldname": "paper_tube",
+   "fieldtype": "Link",
+   "label": "Paper Tube",
+   "options": "Item"
+  },
+  {
+   "fetch_from": "paper_tube.weight_per_unit",
+   "fieldname": "spool_weight",
+   "fieldtype": "Float",
+   "label": "Paper tube weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "posting_time",
+   "fieldtype": "Time",
+   "label": "Posting Time"
+  },
+  {
+   "fieldname": "package_warehouse",
+   "fieldtype": "Link",
+   "label": "Package Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "s_warehouse",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "in_standard_filter": 1,
+   "label": "Source Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "t_warehouse",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Target Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "batch_no",
+   "fieldtype": "Link",
+   "label": "Finished Item Batch",
+   "options": "Batch",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "Other Production",
+   "fieldname": "workstation",
+   "fieldtype": "Link",
+   "label": "Workstation",
+   "options": "Workstation"
+  },
+  {
+   "fieldname": "package_series",
+   "fieldtype": "Data",
+   "label": "Package Series",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "series_value",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Series Value",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval: doc.docstatus == 0",
+   "fieldname": "update_series_number",
+   "fieldtype": "Button",
+   "label": "Update Series Number"
+  },
+  {
+   "fieldname": "section_break_15",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "package_details",
+   "fieldtype": "Table",
+   "label": "Package Details",
+   "options": "Other Production Package Details",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_20",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_gross_weight",
+   "fieldtype": "Float",
+   "label": "Total Gross Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_net_weight",
+   "fieldtype": "Float",
+   "label": "Total Net Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_23",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_tare_weight",
+   "fieldtype": "Float",
+   "label": "Total Tare Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_spool",
+   "fieldtype": "Int",
+   "label": "Total Paper Tubes",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Other Production",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "default": "DownGrade Yarn Waste",
+   "fieldname": "price_list",
+   "fieldtype": "Link",
+   "label": "Price list ",
+   "options": "Price List"
+  }
+ ],
+ "is_submittable": 1,
+ "modified": "2019-12-07 15:18:36.330411",
+ "modified_by": "Administrator",
+ "module": "Spinning",
+ "name": "Other Production",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Manufacturing Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Stock User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Stock Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

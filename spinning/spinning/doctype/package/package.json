@@ -1,0 +1,488 @@
+{
+ "allow_import": 1,
+ "creation": "2019-08-07 15:52:22.298797",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "package_no",
+  "package_series",
+  "package_type",
+  "is_returnable",
+  "package_item",
+  "column_break_3",
+  "status",
+  "spools",
+  "paper_tube",
+  "company",
+  "weight_details_section",
+  "gross_weight",
+  "spool_weight",
+  "package_weight",
+  "column_break_11",
+  "net_weight",
+  "tare_weight",
+  "batch_details_section",
+  "batch_no",
+  "item_code",
+  "item_name",
+  "column_break_17",
+  "merge",
+  "grade",
+  "warehouse",
+  "incoming_details_section",
+  "purchase_document_type",
+  "purchase_document_no",
+  "purchase_date",
+  "purchase_time",
+  "incoming_rate",
+  "column_break_26",
+  "supplier",
+  "supplier_name",
+  "outgoing_details_section",
+  "delivery_document_type",
+  "delivery_document_no",
+  "delivery_date",
+  "delivery_time",
+  "is_delivered",
+  "column_break_34",
+  "customer",
+  "customer_name",
+  "consumption_detail_section",
+  "consumptions",
+  "section_break_45",
+  "total_consumed_qty",
+  "column_break_47",
+  "remaining_qty",
+  "return_details_section",
+  "ownership_type",
+  "ownership",
+  "returnable_by",
+  "column_break_39",
+  "is_returned",
+  "returned_on"
+ ],
+ "fields": [
+  {
+   "fieldname": "package_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Package No",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "package_series",
+   "fieldtype": "Data",
+   "label": "Package Series",
+   "read_only": 1
+  },
+  {
+   "fieldname": "package_type",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Package Type",
+   "options": "\nBox\nPallet\nBag",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "depends_on": "eval: doc.package_type == \"Pallet\"",
+   "fieldname": "is_returnable",
+   "fieldtype": "Check",
+   "label": "Is Returnable",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break",
+   "read_only": 1
+  },
+  {
+   "fieldname": "spools",
+   "fieldtype": "Int",
+   "label": "Spools",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1
+  },
+  {
+   "fieldname": "weight_details_section",
+   "fieldtype": "Section Break",
+   "label": "Weight Details",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gross_weight",
+   "fieldtype": "Float",
+   "label": "Gross Weight",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "spool_color.weight_per_unit",
+   "fieldname": "spool_weight",
+   "fieldtype": "Float",
+   "label": "Spool Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "package_weight",
+   "fieldtype": "Float",
+   "label": "Package Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break",
+   "read_only": 1
+  },
+  {
+   "fieldname": "net_weight",
+   "fieldtype": "Float",
+   "label": "Net Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tare_weight",
+   "fieldtype": "Float",
+   "label": "Tare Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "batch_details_section",
+   "fieldtype": "Section Break",
+   "label": "Batch Details",
+   "read_only": 1
+  },
+  {
+   "fieldname": "batch_no",
+   "fieldtype": "Link",
+   "label": "Batch No",
+   "options": "Batch",
+   "read_only": 1
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_17",
+   "fieldtype": "Column Break",
+   "read_only": 1
+  },
+  {
+   "fieldname": "merge",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Merge",
+   "options": "Merge",
+   "read_only": 1
+  },
+  {
+   "fieldname": "grade",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Grade",
+   "options": "Grade",
+   "read_only": 1
+  },
+  {
+   "fieldname": "incoming_details_section",
+   "fieldtype": "Section Break",
+   "label": "Incoming Details",
+   "read_only": 1
+  },
+  {
+   "fieldname": "purchase_document_type",
+   "fieldtype": "Link",
+   "label": "Voucher Type",
+   "options": "DocType",
+   "read_only": 1
+  },
+  {
+   "fieldname": "purchase_document_no",
+   "fieldtype": "Dynamic Link",
+   "label": "Voucher No",
+   "options": "purchase_document_type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "purchase_date",
+   "fieldtype": "Date",
+   "label": "Incoming Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "purchase_time",
+   "fieldtype": "Time",
+   "label": "Incoming Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "incoming_rate",
+   "fieldtype": "Currency",
+   "label": "Incoming Rate",
+   "options": "Company:company:default_currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_26",
+   "fieldtype": "Column Break",
+   "read_only": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "options": "Supplier",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "supplier.supplier_name",
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "label": "Supplier Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "outgoing_details_section",
+   "fieldtype": "Section Break",
+   "label": "Outgoing Details",
+   "read_only": 1
+  },
+  {
+   "fieldname": "delivery_document_type",
+   "fieldtype": "Link",
+   "label": "Delivery Document Type",
+   "options": "DocType",
+   "read_only": 1
+  },
+  {
+   "fieldname": "delivery_document_no",
+   "fieldtype": "Dynamic Link",
+   "label": "Delivery Document No",
+   "options": "delivery_document_type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "delivery_date",
+   "fieldtype": "Date",
+   "label": "Delivery Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "delivery_time",
+   "fieldtype": "Time",
+   "label": "Delivery Time",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_delivered",
+   "fieldtype": "Check",
+   "label": "Is Delivered",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_34",
+   "fieldtype": "Column Break",
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "customer.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.is_returnable",
+   "fieldname": "return_details_section",
+   "fieldtype": "Section Break",
+   "label": "Return Details",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ownership_type",
+   "fieldtype": "Select",
+   "label": "Ownership Type",
+   "options": "\nCompany\nSupplier",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ownership",
+   "fieldtype": "Dynamic Link",
+   "label": "Ownership",
+   "options": "ownership_type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "returnable_by",
+   "fieldtype": "Date",
+   "label": "Returnable By",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_39",
+   "fieldtype": "Column Break",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_returned",
+   "fieldtype": "Check",
+   "label": "Is Returned",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.is_returned",
+   "fieldname": "returned_on",
+   "fieldtype": "Date",
+   "label": "Returned On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Warehouse",
+   "options": "Warehouse",
+   "read_only": 1
+  },
+  {
+   "fieldname": "package_item",
+   "fieldtype": "Link",
+   "label": "Package Item",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fieldname": "consumption_detail_section",
+   "fieldtype": "Section Break",
+   "label": "Consumption Details",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_45",
+   "fieldtype": "Section Break",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_47",
+   "fieldtype": "Column Break",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remaining_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Remaining Qty",
+   "read_only": 1
+  },
+  {
+   "fieldname": "paper_tube",
+   "fieldtype": "Link",
+   "label": "Paper Tube",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "\nIn Stock\nPartial Stock\nOut of Stock",
+   "read_only": 1
+  },
+  {
+   "fieldname": "consumptions",
+   "fieldtype": "Table",
+   "label": "Consumption",
+   "options": "Package Consumption",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_consumed_qty",
+   "fieldtype": "Float",
+   "label": "Total Consumed Qty",
+   "read_only": 1
+  }
+ ],
+ "modified": "2019-12-07 15:18:44.243015",
+ "modified_by": "Administrator",
+ "module": "Spinning",
+ "name": "Package",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Stock User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Stock Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "item_code, merge, grade,package_no",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "package_no",
+ "track_changes": 1
+}

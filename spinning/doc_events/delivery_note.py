@@ -1,0 +1,102 @@
+# -*- coding: utf-8 -*-
+
+
+import frappe
+from frappe import _
+from frappe.utils import flt, cint
+from erpnext.stock.doctype.batch.batch import set_batch_nos
+from erpnext.stock.doctype.delivery_note.delivery_note import DeliveryNote
+from spinning.controllers.batch_controller import set_batches
+
+
+def before_validate(self, method):
+	# if self._action == 'submit':
+		# set_items_as_per_packages(self)
+	# set_items_as_per_packages(self)
+	validate_packages(self)
+
+def before_save(self, method):
+	calculate_totals(self)
+
+def on_submit(self, method):
+	update_packages(self, method)
+
+def on_cancel(self, method):
+	update_packages(self, method)
+
+
+def validate_packages(self):
+	for row in self.packages:
+		status = frappe.db.get_value("Package", row.package, 'status')
+
+		if status == "Out of Stock":
+			frappe.throw(_("Row {}: Package {} is Out of Stock. Please select another package.".format(row.idx, frappe.bold(row.package))))
+
+def set_items_as_per_packages(self):
+	to_remove = []
+	items_row_dict = {}
+
+	for row in self.items:
+		has_batch_no = frappe.db.get_value("Item", row.item_code, 'has_batch_no')
+		
+		if has_batch_no:
+			to_remove.append(row)
+			items_row_dict.setdefault(row.item_code, row.as_dict())
+
+	else:
+		[self.remove(d) for d in to_remove]
+
+	package_items = {}
+	
+	for row in self.packages:
+		key = (row.item_code, row.merge, row.grade, row.batch_no)
+		package_items.setdefault(key, frappe._dict({
+			'net_weight': 0,
+			'gross_weight': 0,
+			'packages': 0,
+			'no_of_spools': 0,
+		}))
+
+		package_items[key].update(items_row_dict.get(row.item_code))
+		package_items[key].warehouse = row.warehouse
+		package_items[key].net_weight += row.net_weight
+		package_items[key].gross_weight += row.gross_weight
+		package_items[key].no_of_spools += row.spools
+		package_items[key].packages += 1
+
+	for (item_code, merge, grade, batch_no), args in list(package_items.items()):
+		amount = flt(args.rate * args.net_weight)
+
+		values = args.copy()
+		values.pop('idx')
+		values.pop('name')
+		values.amount = amount
+		values.merge = merge
+		values.grade = grade
+		values.batch_no = batch_no
+		values.qty = args.net_weight
+		values.gross_wt = args.gross_weight
+		values.spools = args.no_of_spools
+		values.no_of_packages = args.packages
+
+		self.append('items', values)
+
+	if package_items:
+		for idx, row in enumerate(self.items, start = 1):
+			row.idx = idx
+
+def calculate_totals(self):
+	self.total_gr_wt = sum([row.gross_wt for row in self.items])
+
+def update_packages(self, method):
+	if method == "on_submit":
+		for row in self.packages:
+			doc = frappe.get_doc("Package", row.package)
+			doc.add_consumption(self.doctype, self.name, row.net_weight)
+			doc.save(ignore_permissions=True)
+
+	elif method == "on_cancel":
+		for row in self.packages:
+			doc = frappe.get_doc("Package", row.package)
+			doc.remove_consumption(self.doctype, self.name)
+			doc.save(ignore_permissions=True)

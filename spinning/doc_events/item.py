@@ -1,0 +1,78 @@
+# -*- coding: utf-8 -*-
+
+
+import frappe
+from frappe import _
+from frappe.utils import cstr
+
+from erpnext.controllers.item_variant import copy_attributes_to_variant
+from erpnext.stock.doctype.item.item import Item
+
+@frappe.whitelist()
+def validate(self, method):
+	if self.is_new():
+		if self.get('variant_of'):
+			validate_variant_attributes(self)
+			remove_variant_name_from_item_name(self)
+			add_grades_to_variant_from_template(self)
+
+	Item.update_variants = update_variants
+
+def remove_variant_name_from_item_name(self):
+	self.item_name = self.item_name.replace(self.variant_of + "-", "", 1)
+	self.description = self.description.replace(self.variant_of, "", 1)
+
+def add_grades_to_variant_from_template(self):
+	template = frappe.get_doc("Item", self.variant_of)
+	grades = [{'grade_detail': row.grade_detail} for row in template.grades]
+	self.set("grades", [])
+	self.extend("grades", grades)
+
+def validate_variant_attributes(self):
+	template = frappe.get_doc("Item", self.variant_of)
+
+	if len(template.attributes) != len(self.attributes):
+		frappe.throw(_("Variant Attributes Length must be same as Template."))
+
+	else:
+		for variant_row, template_row in zip(self.attributes, template.attributes):
+			if variant_row.attribute != template_row.attribute:
+				frappe.throw(_("#Row {}: Variant Attribute must be {}".format(variant_row.idx, template_row.attribute)))
+
+		for variant_row in self.attributes:
+			if not cstr(variant_row.attribute_value):
+				frappe.throw(_("#Row {}: Attribute Value is mandatory.".format(variant_row.idx)))
+
+
+def update_variants(self):
+	if self.flags.dont_update_variants or \
+			frappe.db.get_single_value('Item Variant Settings', 'do_not_update_variants'):
+		return
+
+	if self.has_variants:
+		variants = frappe.db.get_all("Item", fields=["item_code"], filters={"variant_of": self.name})
+		if variants:
+			if len(variants) <= 30:
+				update_variants_with_grades(variants, self, publish_progress=False)
+				frappe.msgprint(_("Item Variants Updated."))
+			else:
+				frappe.enqueue("spinning.doc_events.item.update_variants_with_grades",
+					variants=variants, template=self, now=frappe.flags.in_test, timeout=600)
+
+
+def update_variants_with_grades(variants, template, publish_progress=True):
+	count=0
+	grades = [{'grade_detail': row.grade_detail} for row in template.grades]
+
+	for d in variants:
+		variant = frappe.get_doc("Item", d)
+		item_group = variant.item_group
+		copy_attributes_to_variant(template, variant)
+		variant.set("grades", [])
+		variant.extend("grades", grades)
+		variant.item_group = item_group
+		variant.save()
+		count+=1
+		
+		if publish_progress:
+			frappe.publish_progress(count*100/len(variants), title = _("Updating Variants..."))

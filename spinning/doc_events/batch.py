@@ -1,0 +1,32 @@
+# -*- coding: utf-8 -*-
+
+
+import frappe
+from frappe import _
+
+
+@frappe.whitelist()
+def before_naming(self, method):
+	override_batch_autoname(self)
+
+def override_batch_autoname(self):
+	from erpnext.stock.doctype.batch.batch import Batch
+	Batch.autoname = batch_autoname
+
+def batch_autoname(self):
+	from frappe.model.naming import make_autoname
+	
+	# batch_series, batch_wise_cost = frappe.db.get_value("Stock Settings", None, ['naming_series_prefix', 'exact_cost_valuation_for_batch_wise_items'])
+	series = 'BTH-.YY.MM.DD.-.###'
+
+	# if batch_wise_cost and batch_series:
+	# 	series = batch_series
+
+	name = None
+	while not name:
+		name = make_autoname(series, "Batch", self)
+		if frappe.db.exists('Batch', name):
+			name = None
+
+	self.batch_id = name
+	self.name = name

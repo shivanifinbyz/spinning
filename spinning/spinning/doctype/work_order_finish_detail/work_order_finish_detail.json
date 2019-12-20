@@ -1,0 +1,81 @@
+{
+ "creation": "2019-08-07 18:06:14.717795",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "package_weight",
+  "no_of_spool",
+  "gross_weight",
+  "column_break_4",
+  "net_weight",
+  "tare_weight",
+  "print",
+  "package"
+ ],
+ "fields": [
+  {
+   "fieldname": "package_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Carton Weight"
+  },
+  {
+   "columns": 1,
+   "fieldname": "no_of_spool",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "No of Spool"
+  },
+  {
+   "fieldname": "gross_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Gross Weight"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "net_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Net Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tare_weight",
+   "fieldtype": "Float",
+   "label": "Tare Weight",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "print",
+   "fieldtype": "Button",
+   "in_list_view": 1,
+   "label": "Print"
+  },
+  {
+   "columns": 2,
+   "fieldname": "package",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Package",
+   "no_copy": 1,
+   "options": "Package",
+   "read_only": 1
+  }
+ ],
+ "istable": 1,
+ "modified": "2019-12-07 15:19:43.178214",
+ "modified_by": "Administrator",
+ "module": "Spinning",
+ "name": "Work Order Finish Detail",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
